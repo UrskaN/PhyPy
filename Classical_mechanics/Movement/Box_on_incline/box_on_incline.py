@@ -10,25 +10,38 @@ class Box_on_incline(object):
 		self.Fg=None
 		self.Fd=None
 		
-		self.ktr=None
-		self.Ftr=None
+		self.kf=None
+		self.Ff=None
 
+		self.given_data=set()
 		self.add_data(**kwargs)
 
 	def add_data(self,**kwargs):
-		self.angle=kwargs['angle'] if 'angle' in kwargs else self.angle
+		self.given_data.update(kwargs.keys())
+		if 'angle' in kwargs:
+			if 0 <= kwargs['angle'] <= 90 :
+				self.angle=kwargs['angle']
+			else:
+				raise ValueError('Angle should be between 0 an 90 degrees')
 		self.width=kwargs['width'] if 'width' in kwargs else self.width
 		self.height=kwargs['height'] if 'height' in kwargs else self.height
 
 		self.m=kwargs['m'] if 'm' in kwargs else self.m
 		self.Fg=kwargs['Fg'] if 'Fg' in kwargs else self.Fg
 		self.Fd=kwargs['Fd'] if 'Fd' in kwargs else self.Fd
+		
+		if 'kf' in kwargs:
+			if 0 <= kwargs['kf'] <= 1:
+				self.kf=kwargs['kf']
+			else:
+				raise ValueError('Coefficient (kf) should be between 0 and 1')
+		self.Ff=kwargs['Ff'] if 'Ff' in kwargs else self.Ff
 
-		self.ktr=kwargs['ktr'] if 'ktr' in kwargs else self.ktr
-		self.Ftr=kwargs['Ftr'] if 'Ftr' in kwargs else self.Ftr
 
-
-	def delete_data(self,args):
+	def delete_data(self,*args):
 		pass
-	def calculate(self,args):
+	def calculate(self,*args):
+		pass
+	
+	def check_data(self,*args):
 		pass

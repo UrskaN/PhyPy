@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__))+'/../')
 
 from box_on_incline import Box_on_incline
 
-#Box_on_incline(**kwargs):  -->  (angle,height,width)  ,(mass,Fg,Fd,Fs) , (Ftr,ktr)
+#Box_on_incline(**kwargs):  -->  (angle,height,width)  ,(mass,Fg,Fd,Fs) , (Ff,kf)
 #methods:
 #-add_data(**kwargs)
 #-delete_data(**args)
@@ -31,15 +31,21 @@ class box_on_incline_test(unittest.TestCase):
                 self.assertEqual(25,self.incline.angle)
         def test_incline_add_returns_error_on_wrong_angle(self):
         	self.assertRaises(ValueError,self.incline.add_data,angle=110)
-        def test_incline_add_returns_error_on_to_big_ktr(self):
-                self.assertRaises(ValueError,self.incline.add_data,ktr=1.2)
-        def test_incline_add_returns_error_on_negative_ktr(self):
-                self.assertRaises(ValueError,self.incline.add_data,ktr=-0.2)
+        def test_incline_add_returns_error_on_to_big_kf(self):
+                self.assertRaises(ValueError,self.incline.add_data,kf=1.2)
+        def test_incline_add_returns_error_on_negative_kf(self):
+                self.assertRaises(ValueError,self.incline.add_data,kf=-0.2)
         def test_incline_delete_deletes_all_data_when_called_without_args(self):
+                self.incline.add_data(m=1,angle=4,height=4,Fg=9.81,width=4,kf=0,Ff=3)
                 self.incline.delete_data()
                 self.assertEqual(None,self.incline.m)
+                self.assertEqual(None,self.incline.Fg)
+                self.assertEqual(None,self.incline.Fd)
+                self.assertEqual(None,self.incline.height)
                 self.assertEqual(None,self.incline.angle)
-                #TODO check that all of variables are none
+                self.assertEqual(None,self.incline.width)
+                self.assertEqual(None,self.incline.kf)
+                self.assertEqual(None,self.incline.Ff)
         def test_incline_calculate_returns_error_for_opossing_arguments(self):
                 self.incline.add_data(m=1,angle=30,height=10,width=1)#angle should be around 84
                 self.assertRaises(ValueError,self.incline.calculate)
@@ -48,9 +54,9 @@ class box_on_incline_test(unittest.TestCase):
                 self.incline.delete_data()
                 self.incline.add_data(m=1,angle=30)
                 self.incline.calculate()
-                self.assertEqual(9.81,self.incline.fg)
-                self.assertEqual(9.81/2,fd)
-                self.assertEqual(9.81*math.sqrt(3)/2,self.incline.fs)
+                self.assertEqual(9.81,self.incline.Fg)
+                self.assertEqual(9.81/2,Fd)
+                self.assertEqual(9.81*math.sqrt(3)/2,self.incline.Fs)
 
 
 
