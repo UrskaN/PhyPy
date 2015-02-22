@@ -1,6 +1,6 @@
 import unittest
 import sys
-import os,io
+import os
 import math
 sys.path.append(os.path.dirname(os.path.realpath(__file__))+'/../')
 
@@ -43,34 +43,14 @@ class box_on_incline__init_and_add_test(unittest.TestCase):
                 correct='Box on incline:\n'
                 for param in data:
                         correct+='\t{0}={1}\n'.format(param,data[param])
-                #geting print output of function
-                backup=sys.stdout
-                sys.stdout=io.StringIO()
-                ###
-                self.incline
-                ###
-                out=sys.stdout.getvalue()
-                sys.stdout.close()
-                sys.stdout=backup
-                ###
-                self.assertEqual(out,correct)
+       
+                self.assertEqual(self.incline.__str__(),correct)
 
         def test_incline_rep_shows_values_right(self):
                 data=self.generate_data()
                 self.incline.add_data(**data)
-                self.incline
                 correct='Box_on_incline(**{0})'.format(data)
-                #geting print output of function
-                backup=sys.stdout
-                sys.stdout=io.StringIO()
-                ###
-                self.incline
-                ###
-                out=sys.stdout.getvalue()
-                sys.stdout.close()
-                sys.stdout=backup
-                ###
-                self.assertEqual(out,correct)
+                self.assertEqual(self.incline.__repr__(),correct)
 
                 
         def test_incline_add_returns_error_on_wrong_angle(self):
@@ -85,7 +65,6 @@ class box_on_incline__init_and_add_test(unittest.TestCase):
 
         def generate_data(self):
                 #probably should make it a random generator
-                #We try to add data to object
                 data=dict()
                 values=[i for i in range(len(self.attr))]
                 for i in range(len(self.attr)):

@@ -10,6 +10,15 @@ class Box_on_incline(object):
                 self.given_data=set() #set of data given by user
                 self.add_data(**kwargs)
 
+        def __repr__(self):
+                return 'Box_on_incline(**{0})'.format(self.data)
+        
+        def __str__(self):
+                string='Box on incline:\n'
+                for param in self.data:
+                        string+='\t{0}={1}\n'.format(param,self.data[param])
+                return string
+
         def add_data(self,**kwargs):
                 self.given_data.update(kwargs.keys())
                 for i in range(len(self.attr)):
