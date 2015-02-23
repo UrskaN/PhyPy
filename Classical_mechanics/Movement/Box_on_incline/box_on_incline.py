@@ -32,7 +32,12 @@ class Box_on_incline(object):
                                         self.data[param]=kwargs[param]
 
         def delete_data(self,*args):
-                self.__init__()
+                if args:
+                        for param in args:
+                                del self.data[param]
+                        self.__init__(**self.data)
+                else:
+                        self.__init__()
         def calculate(self,*args):
                 pass
 
