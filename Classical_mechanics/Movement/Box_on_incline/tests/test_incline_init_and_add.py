@@ -46,7 +46,7 @@ class box_on_incline__init_and_add_test(unittest.TestCase):
 		for param in data:
 			correct+='\t\t{0}={1}\n'.format(param,data[param])
 		correct+='\tCalculated data:\n'
-		correct+='\tData not possible to btain:\n'
+		correct+='\tData not possible to calculate:\n'
 		correct+='\t\tm=None\n'
 		correct+='\t\tangle=None\n'
 		self.assertEqual(self.incline.__str__(),correct)
@@ -70,7 +70,7 @@ class box_on_incline__init_and_add_test(unittest.TestCase):
 		self.assertRaises(ValueError,self.incline.add_data,kf=-0.2)	
 
 	def generate_data(self):
-		#probably should make it a random generator
+		#probably should make it a random generatori for numbers betwen 0 and 1
 		data=dict()
 		values=[i for i in range(len(self.attr))]
 		for i in range(len(self.attr)):
