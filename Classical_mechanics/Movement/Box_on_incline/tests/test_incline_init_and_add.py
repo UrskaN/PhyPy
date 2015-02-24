@@ -46,7 +46,7 @@ class box_on_incline__init_and_add_test(unittest.TestCase):
 		for param in data:
 			correct+='\t\t{0}={1}\n'.format(param,data[param])
 		correct+='\tCalculated data:\n'
-		correct+='\tData not possible to calculate:\n'
+		correct+='\tData not calculated:\n'
 		correct+='\t\tm=None\n'
 		correct+='\t\tangle=None\n'
 		self.assertEqual(self.incline.__str__(),correct)
