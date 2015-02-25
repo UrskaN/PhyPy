@@ -81,7 +81,7 @@ class Box_on_incline(object):
                 args: 'm','Fg','Fd','Fs','angle','height','length','width','kf','Ff'
 
                 """
-                pass
+                return self.__str__()
 
         def check_data(self):
                 """Prints current data"""
